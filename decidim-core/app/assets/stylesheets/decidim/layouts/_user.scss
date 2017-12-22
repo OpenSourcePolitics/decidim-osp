@@ -1,0 +1,29 @@
+// User profile, notifications & settings
+
+.user-header{
+  @include clearfix;
+  display: flex;
+  align-items: center;
+}
+
+.user-header__avatar{
+  width: 60px;
+
+  > img{
+    border-radius: 50%;
+    width: 40px;
+  }
+}
+
+.user-header__heading{
+  margin-bottom: 0;
+}
+
+.user-nickname{
+  color: gray;
+  font-size: 1rem;
+
+  .user-contact_link{
+    margin-left: .5rem;
+  }
+}

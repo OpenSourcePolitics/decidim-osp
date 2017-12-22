@@ -1,0 +1,137 @@
+nl:
+  activemodel:
+    attributes:
+      assembly:
+        banner_image: Bannerafbeelding
+        copy_categories: Categorieën kopiëren
+        copy_features: Functies kopiëren
+        description: Beschrijving
+        developer_group: Ontwikkelaarsgroep
+        domain: Domein
+        hashtag: Hashtag
+        hero_image: Afbeelding van de startpagina
+        local_area: Lokaal gebied
+        meta_scope: Omvang metadata
+        participatory_scope: Participatieve scope
+        participatory_structure: Participatieve structuur
+        promoted: gepromoveerd
+        scope_id: Scope
+        scopes_enabled: Scopes ingeschakeld
+        short_description: Korte beschrijving
+        slug: URL slak
+        subtitle: Ondertiteling
+        target: Doel
+        title: Titel
+  decidim:
+    admin:
+      assemblies:
+        create:
+          error: Er is een fout opgetreden bij het maken van een nieuwe bijeenkomt.
+          success: Bijeenkomst is succesvol gecreëerd.
+        destroy:
+          success: Bijeenkomst is succesvol vernietigd.
+        edit:
+          update: Bijwerken
+        form:
+          title: Algemene informatie
+        index:
+          not_published: Niet gepubliceerd
+          published: Gepubliceerd
+        new:
+          create: creëren
+          title: Nieuwe bijeenkomst
+        update:
+          error: Er is een fout opgetreden bij het bijwerken van deze bijeenkomt.
+          success: Bijeenkomst is succesvol bijgewerkt.
+      assemblies_copies:
+        create:
+          error: Er was een fout bij het dupliceren van deze bijeenkomt.
+          success: Bijeenkomst is succesvol gedupliceerd.
+      assembly_copies:
+        new:
+          copy: Kopiëren
+          select: Selecteer welke gegevens u wilt dupliceren
+          title: Dupliceer bijeenkomst
+      assembly_publications:
+        create:
+          error: Er is een fout opgetreden bij het publiceren van deze bijeenkomt.
+          success: Bijeenkomst is succesvol gepubliceerd.
+        destroy:
+          error: Er is een fout opgetreden bij het publiceren van deze bijeenkomt.
+          success: Bijeenkomt succesvol ongepubliceerd.
+      menu:
+        assemblies: Bijeenkomsten
+        assemblies_submenu:
+          attachments: Bijlagen
+          categories: Categorieën
+          features: Kenmerken
+          info: info
+          moderations: Moderaties
+      models:
+        assembly:
+          fields:
+            created_at: Gemaakt bij
+            promoted: Gemarkeerd
+            published: Gepubliceerd
+            title: Titel
+          name: Bijeenkomst
+      titles:
+        assemblies: Bijeenkomsten
+    assemblies:
+      admin:
+        assemblies:
+          form:
+            slug_help: 'URL-slugs worden gebruikt om de URL''s te genereren die naar deze bijeenkomst verwijzen. Enkel letters, cijfers en streepjes worden toegestaan en deze moet beginnen met een letter. Voorbeeld: %{url}'
+        assembly_copies:
+          form:
+            slug_help: 'URL-slugs worden gebruikt om de URL''s te genereren die naar deze bijeenkomst verwijzen. Enkel letters, cijfers en streepjes worden toegestaan en deze moet beginnen met een letter. Voorbeeld: %{url}'
+      index:
+        title: Bijeenkomsten
+      pages:
+        home:
+          highlighted_assemblies:
+            active_assemblies: Actieve bijeenkomsten
+            see_all_assemblies: Bekijk alle bijeenkomsten
+      show:
+        developer_group: Ontwikkelaarsgroep
+        local_area: Lokaal gebied
+        participatory_scope: Participatieve scope
+        participatory_structure: Participatieve structuur
+        scope: Scope
+        target: Doel
+      statistics:
+        answers_count: Antwoorden
+        assemblies_count: Bijeenkomsten
+        comments_count: Reacties
+        headline: Activiteit
+        meetings_count: Vergaderingen
+        orders_count: Stemmen
+        pages_count: Pagina's
+        projects_count: Projecten
+        proposals_count: Voorstellen
+        results_count: Resultaten
+        surveys_count: Enquêtes
+        users_count: Deelnemers
+        votes_count: Stemmen
+    menu:
+      assemblies: Bijeenkomsten
+  layouts:
+    decidim:
+      assemblies:
+        assembly:
+          take_part: Deelnemen
+        index:
+          promoted_assemblies: Gemarkeerde bijenkomsten
+        order_by_assemblies:
+          assemblies:
+            one: "%{count} bijeenkomst"
+            other: "%{count} bijeenkomsten"
+        promoted_assembly:
+          more_info: Meer informatie
+          take_part: Deelnemen
+      assembly_header:
+        assembly_menu_item: De bijeenkomst
+        unfold: Uitvouwen
+      assembly_widgets:
+        show:
+          take_part: Deelnemen

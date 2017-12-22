@@ -1,0 +1,409 @@
+version: 2
+
+defaults: &defaults
+  docker:
+    # This is the sha of the latest `decidim/decidim:latest-dev` docker image. You can retrieve the
+    # latest digest by doing `$ docker pull decidim/decidim:latest-dev`.
+    - image: decidim/decidim@sha256:d54f0b0d026ec5fda24b44d5a45ce0fbe9df201595f3d6cb82efb44183216c83
+      environment:
+        BUNDLE_GEMFILE: /app/Gemfile
+        SIMPLECOV: true
+        DATABASE_USERNAME: postgres
+        FAIL_FAST: true
+    - image: postgres
+      environment:
+        POSTGRES_USER: postgres
+  working_directory: /app
+
+jobs:
+  build_test_app:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - bundler-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install ruby dependencies
+          command: bundle install
+      - save_cache:
+          key: bundler-dependencies-{{ checksum "Gemfile.lock" }}
+          paths:
+            - /usr/local/bundle/
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Generate test app
+          command: bundle exec rake test_app
+      - restore_cache:
+         keys:
+           - assets-{{ .Branch }}
+           - assets-master
+      - run:
+          name: Precompile test app assets
+          command: cd spec/decidim_dummy_app && bundle exec rails assets:precompile
+      - save_cache:
+          key: assets-{{ .Branch }}
+          paths:
+            - spec/decidim_dummy_app/public/assets
+      - persist_to_workspace:
+          root: /app
+          paths:
+            - "*"
+  main:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /app
+      - checkout
+      - restore_cache:
+          keys:
+            - bundler-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install ruby dependencies
+          command: bundle install
+      - save_cache:
+          key: bundler-dependencies-{{ checksum "Gemfile.lock" }}
+          paths:
+            - /usr/local/bundle/
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Run main folder RSpec
+          command: bundle exec rspec
+  core:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /app
+      - restore_cache:
+          keys:
+            - bundler-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Create test DB
+          command: cd spec/decidim_dummy_app && RAILS_ENV=test bundle exec rake db:create db:schema:load
+      - run:
+          name: Run core RSpec
+          command: cd decidim-core && rake
+      - store_artifacts:
+          path: /app/spec/decidim_dummy_app/tmp/capybara
+  assemblies:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /app
+      - restore_cache:
+          keys:
+            - bundler-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Create test DB
+          command: cd spec/decidim_dummy_app && RAILS_ENV=test bundle exec rake db:create db:schema:load
+      - run:
+          name: Run assemblies RSpec
+          command: cd decidim-assemblies && rake
+      - store_artifacts:
+          path: /app/spec/decidim_dummy_app/tmp/capybara
+  api:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /app
+      - restore_cache:
+          keys:
+            - bundler-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Create test DB
+          command: cd spec/decidim_dummy_app && RAILS_ENV=test bundle exec rake db:create db:schema:load
+      - run:
+          name: Run api RSpec
+          command: cd decidim-api && rake
+      - store_artifacts:
+          path: /app/spec/decidim_dummy_app/tmp/capybara
+  processes:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /app
+      - restore_cache:
+          keys:
+            - bundler-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Create test DB
+          command: cd spec/decidim_dummy_app && RAILS_ENV=test bundle exec rake db:create db:schema:load
+      - run:
+          name: Run participatory_processes RSpec
+          command: cd decidim-participatory_processes && rake
+      - store_artifacts:
+          path: /app/spec/decidim_dummy_app/tmp/capybara
+  admin:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /app
+      - restore_cache:
+          keys:
+            - bundler-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Create test DB
+          command: cd spec/decidim_dummy_app && RAILS_ENV=test bundle exec rake db:create db:schema:load
+      - run:
+          name: Run admin RSpec
+          command: cd decidim-admin && rake
+      - store_artifacts:
+          path: /app/spec/decidim_dummy_app/tmp/capybara
+  system:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /app
+      - restore_cache:
+          keys:
+            - bundler-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Create test DB
+          command: cd spec/decidim_dummy_app && RAILS_ENV=test bundle exec rake db:create db:schema:load
+      - run:
+          name: Run system RSpec
+          command: cd decidim-system && rake
+      - store_artifacts:
+          path: /app/spec/decidim_dummy_app/tmp/capybara
+  proposals:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /app
+      - restore_cache:
+          keys:
+            - bundler-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Create test DB
+          command: cd spec/decidim_dummy_app && RAILS_ENV=test bundle exec rake db:create db:schema:load
+      - run:
+          name: Run proposals RSpec
+          command: cd decidim-proposals && rake
+      - store_artifacts:
+          path: /app/spec/decidim_dummy_app/tmp/capybara
+  comments:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /app
+      - restore_cache:
+          keys:
+            - yarn-dependencies-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install yarn dependencies
+          command: yarn
+      - save_cache:
+          key: yarn-dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run:
+          name: Run main folder yarn lint & tests
+          command: yarn test:ci
+      - restore_cache:
+          keys:
+            - bundler-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Create test DB
+          command: cd spec/decidim_dummy_app && RAILS_ENV=test bundle exec rake db:create db:schema:load
+      - run:
+          name: Run comments RSpec
+          command: cd decidim-comments && rake
+      - store_artifacts:
+          path: /app/spec/decidim_dummy_app/tmp/capybara
+  meetings:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /app
+      - restore_cache:
+          keys:
+            - bundler-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Create test DB
+          command: cd spec/decidim_dummy_app && RAILS_ENV=test bundle exec rake db:create db:schema:load
+      - run:
+          name: Run meetings RSpec
+          command: cd decidim-meetings && rake
+      - store_artifacts:
+          path: /app/spec/decidim_dummy_app/tmp/capybara
+  pages:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /app
+      - restore_cache:
+          keys:
+            - bundler-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Create test DB
+          command: cd spec/decidim_dummy_app && RAILS_ENV=test bundle exec rake db:create db:schema:load
+      - run:
+          name: Run pages RSpec
+          command: cd decidim-pages && rake
+      - store_artifacts:
+          path: /app/spec/decidim_dummy_app/tmp/capybara
+  accountability:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /app
+      - restore_cache:
+          keys:
+            - bundler-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Create test DB
+          command: cd spec/decidim_dummy_app && RAILS_ENV=test bundle exec rake db:create db:schema:load
+      - run:
+          name: Run accountability RSpec
+          command: cd decidim-accountability && rake
+      - store_artifacts:
+          path: /app/spec/decidim_dummy_app/tmp/capybara
+  budgets:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /app
+      - restore_cache:
+          keys:
+            - bundler-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Create test DB
+          command: cd spec/decidim_dummy_app && RAILS_ENV=test bundle exec rake db:create db:schema:load
+      - run:
+          name: Run budgets RSpec
+          command: cd decidim-budgets && rake
+      - store_artifacts:
+          path: /app/spec/decidim_dummy_app/tmp/capybara
+  surveys:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /app
+      - restore_cache:
+          keys:
+            - bundler-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Create test DB
+          command: cd spec/decidim_dummy_app && RAILS_ENV=test bundle exec rake db:create db:schema:load
+      - run:
+          name: Run surveys RSpec
+          command: cd decidim-surveys && rake
+      - store_artifacts:
+          path: /app/spec/decidim_dummy_app/tmp/capybara
+  verifications:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /app
+      - restore_cache:
+          keys:
+            - bundler-dependencies-{{ checksum "Gemfile.lock" }}
+      - run: export CODECOV_FLAG=verifications
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Create test DB
+          command: cd spec/decidim_dummy_app && RAILS_ENV=test bundle exec rake db:create db:schema:load
+      - run:
+          name: Run verifications RSpec
+          command: cd decidim-verifications && rake
+      - store_artifacts:
+          path: /app/spec/decidim_dummy_app/tmp/capybara
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build_test_app:
+          filters:
+            branches:
+              ignore: /^l10n_master$/
+      - main:
+          filters:
+            branches:
+              ignore: /^l10n_master$/
+      - core:
+          requires:
+            - build_test_app
+      - assemblies:
+          requires:
+            - build_test_app
+      - api:
+          requires:
+            - build_test_app
+      - processes:
+          requires:
+            - build_test_app
+      - admin:
+          requires:
+            - build_test_app
+      - system:
+          requires:
+            - build_test_app
+      - proposals:
+          requires:
+            - build_test_app
+      - comments:
+          requires:
+            - build_test_app
+      - meetings:
+          requires:
+            - build_test_app
+      - pages:
+          requires:
+            - build_test_app
+      - accountability:
+          requires:
+            - build_test_app
+      - budgets:
+          requires:
+            - build_test_app
+      - surveys:
+          requires:
+            - build_test_app
+      - verifications:
+          requires:
+            - build_test_app

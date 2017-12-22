@@ -1,0 +1,456 @@
+nl:
+  activemodel:
+    attributes:
+      account:
+        delete_reason: Reden om uw account te verwijderen
+      report:
+        details: Aanvullende opmerkingen
+      user:
+        email: Uw e-mailadres
+        name: Uw naam
+        password: Nieuw wachtwoord
+        password_confirmation: Bevestig uw nieuwe wachtwoord
+        remove_avatar: Verwijder avatar
+        user_group_document_number: Organisatie documentnummer
+        user_group_name: Naam van de organisatie
+        user_group_phone: Telefoon organisatie
+  activerecord:
+    attributes:
+      decidim/user:
+        current_password: Huidige wachtwoord
+        email: E-mailadres
+        name: Gebruikersnaam
+        password: Wachtwoord
+        password_confirmation: Wachtwoordbevestiging
+        remember_me: Blijf ingelogd
+        user_group_document_number: Organisatie documentnummer
+        user_group_name: Naam van de organisatie
+        user_group_phone: Telefoon organisatie
+  booleans:
+    'false': 'Nee'
+    'true': 'Ja'
+  carrierwave:
+    errors:
+      image_too_big: De afbeelding is te groot
+  decidim:
+    account:
+      delete:
+        alert: Deze actie kan niet ongedaan gemaakt worden. Als u uw account verwijdert, zal u zich niet meer kunnen aanmelden.
+        confirm:
+          close: Sluit dit scherm
+          ok: Ja, ik wil mijn account verwijderen
+          question: Weet u zeker dat u uw account wilt verwijderen?
+          title: Verwijder mijn account
+        explanation: Vul alstublieft de reden in waarom u uw account wilt verwijderen (optioneel).
+      destroy:
+        error: Er is een fout opgetreden bij het verwijderen van uw account.
+        success: Uw account is succesvol verwijderd.
+      show:
+        change_password: Wachtwoord wijzigen
+        update_account: Account bijwerken
+      update:
+        error: Er is een fout opgetreden bij het bijwerken van uw account.
+        success: Uw account is bijgewerkt.
+        success_with_email_confirmation: Uw account is bijgewerkt. U ontvangt een e-mail ter bevestiging van uw nieuwe e-mailadres.
+    anonymous_user: Anoniem
+    application:
+      documents:
+        related_documents: Gerelateerde documenten
+      photos:
+        related_photos: Gerelateerde foto 's
+    authorization_handlers:
+      dummy_authorization_handler:
+        explanation: Wordt geverifieerd door een documentnummer in te voeren dat eindigt op 'X'
+        fields:
+          document_number: Document Nummer
+          postal_code: Postcode
+        name: Voorbeeld autorisatie
+      dummy_authorization_workflow:
+        name: Dummy autorisatie workflow
+      errors:
+        duplicate_authorization: Een gebruiker is al gemachtigd met dezelfde gegevens.
+      expired_at: Verlopen bij %{timestamp}
+      expires_at: Verloopt op %{timestamp}
+      foo_authorization:
+        fields:
+          bar: Bar
+          foo: Foo
+        name: Foo machtiging
+      granted_at: Toegekend op %{timestamp}
+      started_at: Gestart om %{timestamp}
+    contact: Contact
+    core:
+      actions:
+        unauthorized: U bent niet gemachtigd dit te doen
+    devise:
+      omniauth_registrations:
+        create:
+          email_already_exists: Er is een ander account met hetzelfde e-mailadres
+        new:
+          complete_profile: Volledig profiel
+          nickname_help: Uw unieke ID in decidim.
+          sign_up: Gelieve uw profiel te voltooien
+          subtitle: Vul onderstaand formulier in om de aanmelding te voltooien
+          username_help: Publieke naam die op uw berichten verschijnt. Met het oog op het waarborgen van de anonimiteit hoeft dit niet uw echte naam te zijn.
+      registrations:
+        new:
+          already_have_an_account?: U heeft al een account?
+          newsletter_notifications: Stuur me informatie over relevante activiteiten
+          nickname_help: Uw unieke ID in decidim.
+          sign_in: Aanmelden
+          sign_up: Registratie
+          sign_up_as:
+            legend: Aanmelden als
+            user: Individu
+            user_group: Organisatie/collectief
+          subtitle: Meldt u aan om deel te nemen aan discussies en voorstellen te steunen.
+          terms: de bepalingen en voorwaarden van gebruik
+          tos_agreement: Door het aanmelden gaat u akkoord met %{link}.
+          username_help: Publieke naam die op uw berichten verschijnt. Met het oog op het waarborgen van de anonimiteit hoeft dit niet uw echte naam te zijn.
+      sessions:
+        new:
+          are_you_new?: Nieuw op het platform?
+          register: Een account aanmaken
+      shared:
+        omniauth_buttons:
+          or: Of
+    errors:
+      internal_server_error:
+        title: Er was een probleem met de server
+        try_later: Probeer het later opnieuw.
+      not_found:
+        back_home: Terug naar de hoofdpagina
+        content_doesnt_exist: Dit adres is onjuist of is verwijderd.
+        title: De opgevraagde pagina kan niet gevonden worden
+    events:
+      email_event:
+        email_greeting: Hallo %{user_name},
+        email_intro: 'Er is een update voor ''%{resource_title}''. Je kunt het vanaf deze pagina bekijken:'
+        email_outro: U heeft deze melding ontvangen omdat u "%{resource_title}" volgt. U kan stoppen met deze te volgen via vorige link.
+        email_subject: Een update voor %{resource_title}
+      notification_event:
+        notification_title: Er is een gebeurtenis opgetreden bij <a href="%{resource_path}">%{resource_title}</a>.
+    export_mailer:
+      export:
+        ready: In de bijlage vindt u een versie van uw export.
+      subject: Uw export "%{name}" is klaar
+    features:
+      dummy:
+        actions:
+          bar: Bar
+          foo: Foo
+        name: Dummy functie
+        settings:
+          global:
+            comments_enabled: Reacties ingeschakeld
+            dummy_global_attribute_1: Dummy Kenmerk 1
+            dummy_global_attribute_2: Dummy kenmerk 2
+          step:
+            comments_blocked: Reacties geblokkeerd
+            dummy_step_attribute_1: Dummy Stap Kenmerk 1
+            dummy_step_attribute_2: Dummy Stap Kenmerk 2
+    filters:
+      linked_classes:
+        all: Alle
+        dummyresource: Dummy middelen
+        meeting: Vergaderingen
+        project: Projecten
+        proposal: Voorstellen
+        result: Resultaten
+    follows:
+      create:
+        button: Volgen
+        error: Er is een fout opgetreden na deze bron.
+      destroy:
+        button: Stop met volgen
+        error: Er is een fout opgetreden bij het stoppen met volgen van deze bron.
+    forms:
+      current_file: Huidig ​​bestand
+      current_image: Huidige afbeelding
+      default_image: Standaard afbeelding
+      errors:
+        error: Er is een fout in dit veld.
+      remove_this_file: Verwijder dit bestand
+    managed_users:
+      expired_session: De huidige naboots sessie is verlopen.
+    menu:
+      home: Home
+      more_information: Meer informatie
+    messaging:
+      conversation_mailer:
+        new_conversation:
+          greeting: Hallo, %{recipient}!
+          intro: "%{sender} is een nieuw gesprek met je begonnen. Klik hier om het te zien:"
+          outro: Geniet van Decidim!
+          subject: "%{sender} is een gesprek met je begonnen"
+        new_message:
+          greeting: Hallo, %{recipient}!
+          intro: "%{sender} heeft nieuwe berichten geplaatst in je gesprek. Klik hier om ze te zien:"
+          outro: Geniet van Decidim!
+          subject: Je hebt nieuwe berichten van %{sender}
+      conversations:
+        create:
+          error: Gesprek niet gestart. Probeer het later nogmaals
+        index:
+          no_conversations: Je hebt nog geen gesprekken
+          title: conversaties
+        reply:
+          send: Sturen
+          title: Antwoord
+        show:
+          title: Conversatie met %{usernames}
+        start:
+          send: Sturen
+          title: Een gesprek beginnen
+        update:
+          error: Bericht niet verzonden Probeer het later nogmaals
+    newsletter_mailer:
+      newsletter:
+        note: U ontvangt deze e-mail omdat u bent geabonneerd op nieuwsbrieven van %{organization_name}. U kunt uw instellingen op uw <a href="%{link}">notificatiepagina</a> veranderen.
+    notifications_settings:
+      show:
+        email_on_notification: Ik wil een e-mail ontvangen telkens als ik een melding krijg.
+        newsletter_notifications: Ik wil informatie ontvangen over relevante activiteiten
+        update_notifications_settings: Wijzigingen opslaan
+      update:
+        error: Er is een fout opgetreden bij het bijwerken van uw notificatie instellingen.
+        success: Uw notificatie instellingen zijn bijgewerkt.
+    own_user_groups:
+      index:
+        pending: In behandeling
+        rejected: Geweigerd
+        verified: Geverifieerd
+    pages:
+      index:
+        title: Meer informatie
+    reported_mailer:
+      hide:
+        hello: Hallo %{name},
+        manage_moderations: Beheer moderaties
+        report_html: <p>De volgende <a href="%{url}">content</a> is automatisch verborgen.</p>
+        subject: Een bron is automatisch verborgen
+      report:
+        hello: Hallo %{name},
+        manage_moderations: Beheer moderaties
+        report_html: <p>De volgende <a href="%{url}">content</a> is aangemeld.</p>
+        subject: Een bron is gemeld
+    reports:
+      create:
+        error: Er is een fout opgetreden tijdens het maken van het rapport. Probeer het alstublieft opnieuw.
+        success: Het rapport is gemaakt en het zal worden beoordeeld door een beheerder.
+    scopes:
+      global: Wereldwijd bereik
+      picker:
+        cancel: Annuleer
+        choose: kiezen
+        title: Selecteer %{field}
+      prompt: Selecteer een scope
+      scopes: scopes
+    shared:
+      action_authorization_modal:
+        expired:
+          authorize: Opnieuw autoriseren met "%{authorization}"
+          explanation: Uw autorisatie is verlopen. Als u deze actie wilt uitvoeren, moet u opnieuw gemachtigd worden met '%{authorization}'.
+          title: Autorisatie is verlopen
+        incomplete:
+          cancel: Annuleer
+          explanation: 'Ook al bent u momenteel geautoriseerd met "%{authorization}", moeten we u vragen opnieuw autoriseren omdat we niet beschikken over de volgende gegevens:'
+          reauthorize: Opnieuw autoriseren
+          title: Autoriseert u opnieuw alstublieft
+        missing:
+          authorize: Autoriseren met "%{authorization}"
+          explanation: Om deze actie uit te voeren, moet u autoriseren met "%{authorization}".
+          title: Autorisatie vereist
+        pending:
+          explanation: Als u deze actie wilt uitvoeren, moet u zijn gemachtigd met '%{authorization}', maar uw autorisatie is nog in uitvoering
+          resume: Controleer de voortgang van uw autorisatie bij "%{authorization}"
+          title: Autorisatie is nog bezig
+        unauthorized:
+          explanation: Excuus, u kunt deze actie niet uitvoeren; sommige gegevens kloppen niet.
+          invalid: "%{field} is niet geldig."
+          ok: Ok
+          title: Niet geautoriseerd
+      author:
+        deleted: Verwijderde gebruiker
+        verified_user_group: Geverifieerde organisatie
+      embed_modal:
+        close_window: Sluit dit scherm
+        embed: Plak deze code alstublieft in uw pagina
+        embed_link: insluiten
+      flag_modal:
+        already_reported: Deze inhoud is al gemeld en zal worden beoordeeld door een beheerder.
+        close: Sluit
+        description: Is deze inhoud ongepast?
+        does_not_belong: Bevat illegale activiteit, dreiging met zelfmoord, persoonlijke gegevens, of iets anders dat u denkt dat niet thuis hoort op %{organization_name}.
+        offensive: Bevat racisme, seksisme, laster, persoonlijke aanvallen, bedreigingen, zelfmoord dreiging of haat zaaien.
+        report: Rapporteren
+        spam: Bevat clickbait, reclame, oplichting of script bots.
+        title: Meld een probleem
+      follow_button:
+        sign_in_before_follow: Log alstublieft aan voordat u deze actie uitvoert
+      login_modal:
+        please_sign_in: Log in alstublieft
+        sign_up: Registreren
+      reference:
+        reference: 'Referentie: %{reference}'
+      results_per_page:
+        label: 'Resultaten per pagina:'
+      share_modal:
+        close_window: Sluit dit scherm
+        share: Deel
+        share_link: Link delen
+      version_author:
+        deleted: Verwijderde gebruiker
+  devise:
+    invitations:
+      edit:
+        header: Uw wachtwoord instellen
+        nickname_help: Uw unieke ID in decidim.
+        submit_button: Opslaan
+    mailer:
+      invitation_instructions:
+        accept: Accepteer uitnodiging
+        accept_until: Deze uitnodiging zal verlopen op %{due_date}.
+        hello: Hallo %{email},
+        ignore: |-
+          Negeer deze email als u de uitnodiging niet wilt accepteren.<br /> Uw account wordt niet aangemaakt totdat u via de link hierboven uw wachtwoord instelt.
+        invited_you_as_admin: "%{invited_by} heeft je uitgenodigd als admin van %{application}. U kunt het accepteren via de onderstaande link."
+        someone_invited_you: Iemand heeft u uitgenodigd voor %{application}. U kunt het accepteren via de onderstaande link.
+        someone_invited_you_as_admin: Iemand heeft u uitgenodigd als administrator van %{application}, u kunt het accepteren via onderstaande link.
+      invite_admin:
+        subject: U bent uitgenodigd om %{organization} te beheren
+      invite_collaborator:
+        subject: U bent uitgenodigd om samen te werken bij %{organization}
+      organization_admin_invitation_instructions:
+        subject: U bent uitgenodigd om %{organization} te beheren
+      password_change:
+        greeting: Hallo %{recipient}!
+        message: Wij informeren u dat uw wachtwoord is gewijzigd.
+        subject: Wachtwoord is veranderd
+  errors:
+    messages:
+      content_type_whitelist_error: Het bestandstype is niet geldig
+      cycle_detected: De ouder van een scope kan niet een van zijn afstammelingen zijn
+      file_size_is_less_than_or_equal_to: bestandsgrootte moet kleiner zijn dan %{count}
+      invalid_manifest: Ongeldig manifest
+      invalid_participatory_process: Ongeldige participatief proces
+      long_words: Bevat woorden die te lang zijn
+      must_start_with_caps: Moet beginnen met hoofdletters
+      nesting_too_deep: kan niet binnen een subcategorie zijn
+      too_many_marks: Gebruikt te veel markeringen
+      too_much_caps: Gebruikt te veel hoofdletters
+      too_short: Is te kort
+  forms:
+    required: Vereist
+  invisible_captcha:
+    sentence_for_humans: Als u een mens bent negeert u dit veld
+    timestamp_error_message: Sorry, dat was te snel! Gelieve opnieuw in te dienen.
+  layouts:
+    decidim:
+      cookie_warning:
+        description_html: Deze website maakt gebruik van cookies. Door gebruik te blijven maken van de site gaat u hiermee akkoord. Meer informatie via %{link}.
+        link_label: hier
+        ok: Ik ga akkoord
+      footer:
+        made_with_open_source: Website is gemaakt met <a target="_blank" href="https://github.com/decidim/decidim"> open-source software</a>.
+      header:
+        close_menu: Menu sluiten
+        navigation: Navigatie
+        sign_in: Aanmelden
+        sign_up: Registreren
+      impersonation_warning:
+        close_session: Sluit sessie
+        description_html: U boots de gebruiker <b>%{user_name}</b> na.
+        expire_time_html: Uw sessie vervalt in <b><span class="minutes">%{minutes}</span> minuten</b>.
+      notifications_dashboard:
+        mark_all_as_read: Alles als gelezen markeren
+        no_notifications: Nog geen meldingen.
+        title: Meldingen
+      user_menu:
+        admin_dashboard: Beheer dashboard
+        conversations: conversaties
+        notifications: Meldingen
+        profile: Mijn account
+        public_profile: Mijn openbaar profiel
+        sign_out: Afmelden
+      user_profile:
+        account: Account
+        authorizations: Bevoegdheden
+        delete_my_account: Verwijder mijn account
+        notifications_settings: Notificatie instellingen
+        title: Gebruikersinstellingen
+        user_groups: Organisaties
+      widget:
+        see_more: Zie meer
+  locale:
+    name: Nederlands
+  pages:
+    home:
+      extended:
+        debates: Debatten
+        debates_explanation: Debatteer en bespreek, deel je standpunten en verrijk de relevante onderwerpen.
+        how_to_participate: Hoe neem ik deel in een proces?
+        meetings: Vergaderingen
+        meetings_explanation: Ontdek waar en wanneer u kunt deelnemen aan openbare vergaderingen.
+        more_info: Meer informatie
+        proposals: Voorstellen
+        proposals_explanation: Maak voorstellen, ondersteun de bestaande en bevorder de veranderingen die u wilt zien.
+      footer_sub_hero:
+        footer_sub_hero_body: Laten we bouwen aan een open, transparante en collaborative maatschappij.<br /> Neem deel en beslis.
+        footer_sub_hero_headline: Welkom bij %{organization} participatief platform.
+        register: Registreren
+      hero:
+        participate: Deelnemen
+        welcome: Welkom bij %{organization}!
+      statistics:
+        answers_count: Antwoorden
+        assemblies_count: Assemblies
+        comments_count: Reacties
+        headline: Huidige stand van %{organization}
+        meetings_count: Vergaderingen
+        orders_count: stemmen
+        pages_count: Pages
+        processes_count: Processen
+        projects_count: Projecten
+        proposals_accepted: Aanvaarde voorstellen
+        proposals_count: Voorstellen
+        results_count: Resultaten
+        surveys_count: Enquête
+        users_count: Deelnemers
+        votes_count: Stemmen
+      sub_hero:
+        register: Registeren
+  social_share_button:
+    delicious: Heerlijk
+    douban: Douban
+    email: E-mail
+    facebook: Facebook
+    google_bookmark: Google Bookmark
+    google_plus: Google+
+    hacker_news: Hacker Nieuws
+    linkedin: LinkedIn
+    pinterest: Pinterest
+    qq: Qzone
+    reddit: Reddit
+    share_to: Delen op %{name}
+    tumblr: Tumblr
+    twitter: Twitter
+    vkontakte: Vkontakte
+    wechat: WeChat
+    wechat_footer: Open uw WeChat, klik op "Ontdekken" en open het menu "QR-Code scannen".
+    weibo: Sina Weibo
+    xing: Xing
+  time:
+    formats:
+      day_of_month: "%b %d"
+      day_of_week: "%a"
+      day_of_year: "%d.%m.%y"
+      decidim_short: "%d/%m/%Y %H:%M"
+      time_of_day: "%H:%M"
+  views:
+    pagination:
+      first: "&laquo; Eerste"
+      last: Laatste &raquo;
+      next: Volgende &rsaquo;
+      previous: "&lsaquo; Vorige"
+      truncate: "&hellip;"

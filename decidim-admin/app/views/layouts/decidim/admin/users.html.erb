@@ -1,0 +1,38 @@
+<% content_for :secondary_nav do %>
+  <div class="secondary-nav">
+    <div class="secondary-nav__title">
+      <%= t ".title" %>
+    </div>
+    <ul>
+      <% if can? :index, Decidim::User %>
+        <li <% if is_active_link?(decidim_admin.users_path) %> class="is-active" <% end %>>
+          <%= link_to t("menu.admins", scope: "decidim.admin"), decidim_admin.users_path %>
+        </li>
+      <% end %>
+      <% if can? :index, Decidim::UserGroup %>
+        <li <% if is_active_link?(decidim_admin.user_groups_path) %> class="is-active" <% end %>>
+          <%= link_to t("menu.user_groups", scope: "decidim.admin"), decidim_admin.user_groups_path %>
+        </li>
+      <% end %>
+      <li <% if is_active_link?(decidim_admin.managed_users_path) %> class="is-active" <% end %>>
+        <%= link_to t("menu.managed_users", scope: "decidim.admin"), decidim_admin.managed_users_path %>
+      </li>
+      <li <% if is_active_link?(decidim_admin.authorization_workflows_path) %> class="is-active" <% end %>>
+        <%= link_to t("menu.authorization_workflows", scope: "decidim.admin"), decidim_admin.authorization_workflows_path %>
+        <ul>
+          <% Decidim::Verifications.admin_workflows.each do |manifest| %>
+            <% workflow = Decidim::Verifications::Adapter.new(manifest) %>
+
+            <li <% if is_active_link?(workflow.admin_root_path) %> class="is-active" <% end %>>
+              <%= link_to workflow.fullname, workflow.admin_root_path %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+    </ul>
+  </div>
+<% end %>
+
+<%= render "layouts/decidim/admin/application" do %>
+  <%= yield %>
+<% end %>
